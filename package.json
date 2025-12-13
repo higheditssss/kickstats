@@ -1,5 +1,8 @@
 {
-  "name": "hyghman-kickstats",
-  "private": true,
-  "type": "module"
+  "name": "kickstats",
+  "version": "1.0.0",
+  "type": "module",
+  "dependencies": {
+    "cookie": "^0.6.0"
+  }
 }
