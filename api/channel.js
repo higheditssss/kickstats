@@ -4,39 +4,31 @@ async function kickFetch(url) {
   const res = await fetch(url, {
     headers: {
       "User-Agent": "Mozilla/5.0",
-      "Accept": "application/json"
+      "Accept": "application/json",
+      "Referer": "https://kick.com/"
     }
   });
-  if (!res.ok) throw new Error("Kick blocked");
+
+  if (!res.ok) {
+    throw new Error("Kick request failed");
+  }
+
   return res.json();
 }
 
 export default async function handler(req, res) {
   const { user } = req.query;
+
   if (!user) {
     return res.status(400).json({ error: "Missing user" });
   }
 
   try {
-    // 1️⃣ SEARCH
-    const search = await kickFetch(
-      `https://kick.com/api/v1/search?query=${user}`
-    );
-
-    const channel = search.channels?.find(
-      c => c.slug.toLowerCase() === user.toLowerCase()
-    );
-
-    if (!channel) {
-      return res.status(404).json({ error: "User not found" });
-    }
-
-    // 2️⃣ CHANNEL DATA
+    // 🔥 DIRECT CHANNEL BY SLUG
     const data = await kickFetch(
-      `https://kick.com/api/v2/channels/${channel.id}`
+      `https://kick.com/api/v2/channels/${user}`
     );
 
-    // 3️⃣ RESPONSE
     res.status(200).json({
       username: data.username,
       followers: data.followersCount,
@@ -52,7 +44,9 @@ export default async function handler(req, res) {
         }))
     });
 
-  } catch (e) {
-    res.status(500).json({ error: "Failed to fetch Kick data" });
+  } catch (err) {
+    res.status(404).json({
+      error: "Channel not found or Kick blocked"
+    });
   }
 }
