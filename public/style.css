@@ -92,3 +92,24 @@ iframe {
 .footer a:hover {
   color: #c4b5fd;
 }
+body {
+  background: #0b0b0f;
+  color: #fff;
+  font-family: Inter, system-ui, sans-serif;
+  padding: 30px;
+}
+
+button {
+  background: #7c3aed;
+  border: none;
+  color: white;
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+img {
+  width: 80px;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
