@@ -1,0 +1,25 @@
+{
+  "username": "hyghman",
+  "followers": 30180,
+  "isLive": true,
+  "viewers": 1320,
+  "lastUpdated": "2025-01-13T21:30:00Z",
+  "history": [
+    { "time": "20:30", "followers": 30120 },
+    { "time": "20:45", "followers": 30140 },
+    { "time": "21:00", "followers": 30160 },
+    { "time": "21:15", "followers": 30180 }
+  ],
+  "vods": [
+    {
+      "title": "LIVE • ULTIMUL STREAM",
+      "thumbnail": "https://via.placeholder.com/640x360?text=VOD+1",
+      "url": "https://kick.com/hyghman/videos/123456"
+    },
+    {
+      "title": "LIVE • CHAT & GAMEPLAY",
+      "thumbnail": "https://via.placeholder.com/640x360?text=VOD+2",
+      "url": "https://kick.com/hyghman/videos/123457"
+    }
+  ]
+}

@@ -1,8 +1,5 @@
 {
-  "name": "kickstats",
+  "name": "hyghman-kickstats",
   "private": true,
-  "type": "module",
-  "dependencies": {
-    "node-fetch": "^3.3.2"
-  }
+  "type": "module"
 }
