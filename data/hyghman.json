@@ -1,15 +1,19 @@
 {
   "username": "hyghman",
+  "avatar": "https://kick.com/img/channels/hyghman/profile_image",
   "followers": 30180,
   "isLive": true,
   "viewers": 1320,
-  "lastUpdated": "2025-01-13T21:30:00Z",
+  "lastUpdated": "2025-01-13T22:10:00Z",
+
   "history": [
-    { "time": "20:30", "followers": 30120 },
-    { "time": "20:45", "followers": 30140 },
-    { "time": "21:00", "followers": 30160 },
-    { "time": "21:15", "followers": 30180 }
+    { "time": "21:00", "followers": 30120 },
+    { "time": "21:15", "followers": 30140 },
+    { "time": "21:30", "followers": 30155 },
+    { "time": "21:45", "followers": 30165 },
+    { "time": "22:00", "followers": 30180 }
   ],
+
   "vods": [
     {
       "title": "LIVE • ULTIMUL STREAM",
@@ -20,6 +24,11 @@
       "title": "LIVE • CHAT & GAMEPLAY",
       "thumbnail": "https://via.placeholder.com/640x360?text=VOD+2",
       "url": "https://kick.com/hyghman/videos/123457"
+    },
+    {
+      "title": "LIVE • GAMING NIGHT",
+      "thumbnail": "https://via.placeholder.com/640x360?text=VOD+3",
+      "url": "https://kick.com/hyghman/videos/123458"
     }
   ]
 }

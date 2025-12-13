@@ -2,8 +2,9 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Hyghman – Kick Stats</title>
+<title>hyghman – Kick Stats</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <link rel="stylesheet" href="style.css">
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
@@ -11,39 +12,51 @@
 <body>
 <div class="app">
 
-<header class="header">
-  <div>
-    <h1>hyghman</h1>
-    <span id="liveBadge" class="live hidden">LIVE</span>
-    <p class="sub">Kick channel statistics</p>
-  </div>
-</header>
+  <!-- HEADER -->
+  <header class="header">
+    <div class="profile">
+      <img id="avatar" class="avatar hidden" alt="hyghman avatar">
 
-<section class="stats">
-  <div class="card">
-    <span>Followers</span>
-    <strong id="followers">—</strong>
-  </div>
-  <div class="card">
-    <span>Status</span>
-    <strong id="status">—</strong>
-  </div>
-  <div class="card">
-    <span>Viewers</span>
-    <strong id="viewers">—</strong>
-  </div>
-</section>
+      <div class="profile-text">
+        <h1>
+          hyghman
+          <span id="liveBadge" class="live hidden">LIVE</span>
+        </h1>
+        <p class="sub">Kick channel statistics</p>
+      </div>
+    </div>
+  </header>
 
-<section class="graph">
-  <h3>Followers growth</h3>
-  <canvas id="chart" height="120"></canvas>
-  <div class="updated" id="updated"></div>
-</section>
+  <!-- STATS -->
+  <section class="stats">
+    <div class="card">
+      <span>Followers</span>
+      <strong id="followers">—</strong>
+    </div>
 
-<section class="vods">
-  <h3>Latest VODs</h3>
-  <div id="vodList" class="vod-list"></div>
-</section>
+    <div class="card">
+      <span>Status</span>
+      <strong id="status">—</strong>
+    </div>
+
+    <div class="card">
+      <span>Viewers</span>
+      <strong id="viewers">—</strong>
+    </div>
+  </section>
+
+  <!-- GRAPH -->
+  <section class="graph">
+    <h3>Followers growth</h3>
+    <canvas id="chart" height="120"></canvas>
+    <div class="updated" id="updated">—</div>
+  </section>
+
+  <!-- VODS -->
+  <section class="vods">
+    <h3>Latest VODs</h3>
+    <div id="vodList" class="vod-list"></div>
+  </section>
 
 </div>
 

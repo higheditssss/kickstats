@@ -1,17 +1,31 @@
+const followersEl = document.getElementById("followers");
+const viewersEl   = document.getElementById("viewers");
+const statusEl    = document.getElementById("status");
+const liveBadge   = document.getElementById("liveBadge");
+const updatedEl   = document.getElementById("updated");
+const vodList     = document.getElementById("vodList");
+const avatarEl    = document.getElementById("avatar");
+
 let chart;
 
 async function load(){
   const res = await fetch("/api/hyghman");
   const data = await res.json();
 
-  followers.textContent = data.followers.toLocaleString();
-  viewers.textContent = data.viewers.toLocaleString();
-  status.textContent = data.isLive ? "LIVE" : "OFFLINE";
+  followersEl.textContent = data.followers.toLocaleString();
+  viewersEl.textContent   = data.viewers.toLocaleString();
+  statusEl.textContent    = data.isLive ? "LIVE" : "OFFLINE";
 
   liveBadge.classList.toggle("hidden", !data.isLive);
 
-  updated.textContent =
+  updatedEl.textContent =
     "Last updated: " + new Date(data.lastUpdated).toLocaleString();
+
+  // avatar
+  if (data.avatar) {
+    avatarEl.src = data.avatar;
+    avatarEl.classList.remove("hidden");
+  }
 
   renderGraph(data.history);
   renderVods(data.vods);
@@ -20,7 +34,7 @@ async function load(){
 function renderGraph(history){
   if(chart) chart.destroy();
 
-  chart = new Chart(chart,{
+  chart = new Chart(document.getElementById("chart"),{
     type:"line",
     data:{
       labels:history.map(h=>h.time),
@@ -41,7 +55,7 @@ function renderGraph(history){
 }
 
 function renderVods(vods){
-  vodList.innerHTML="";
+  vodList.innerHTML = "";
   vods.forEach(v=>{
     const d=document.createElement("div");
     d.className="vod";
