@@ -1,164 +1,50 @@
 <!DOCTYPE html>
-<html lang="ro">
+<html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>hyghman • Kick Live</title>
-
-<style>
-* {
-  box-sizing: border-box;
-  font-family: Inter, Segoe UI, system-ui, sans-serif;
-}
-
-body {
-  margin: 0;
-  background: #0b0b0f;
-  color: #e5e7eb;
-}
-
-.app {
-  max-width: 1200px;
-  margin: auto;
-  padding: 24px;
-}
-
-/* HEADER */
-.header {
-  display: flex;
-  align-items: center;
-  gap: 18px;
-  margin-bottom: 24px;
-}
-
-.avatar {
-  width: 72px;
-  height: 72px;
-  border-radius: 50%;
-  border: 2px solid #7c3aed;
-  box-shadow: 0 0 25px #7c3aed55;
-}
-
-.title h1 {
-  margin: 0;
-  font-size: 28px;
-}
-
-.sub {
-  color: #9ca3af;
-  font-size: 14px;
-}
-
-/* LIVE BADGE */
-.live {
-  display: inline-block;
-  margin-left: 10px;
-  padding: 4px 10px;
-  font-size: 12px;
-  background: #7c3aed;
-  border-radius: 999px;
-  animation: pulse 1.4s infinite;
-}
-
-@keyframes pulse {
-  0% { box-shadow: 0 0 0 0 #7c3aed88; }
-  70% { box-shadow: 0 0 0 16px transparent; }
-}
-
-/* PLAYER */
-.player-box {
-  background: linear-gradient(180deg,#0f111a,#0a0a10);
-  border: 1px solid #1f2937;
-  border-radius: 18px;
-  padding: 14px;
-  box-shadow: 0 20px 60px rgba(0,0,0,.6);
-}
-
-iframe {
-  width: 100%;
-  height: 420px;
-  border-radius: 14px;
-  border: none;
-}
-
-/* FOOT INFO */
-.footer {
-  margin-top: 16px;
-  display: flex;
-  justify-content: space-between;
-  color: #9ca3af;
-  font-size: 13px;
-}
-
-.footer a {
-  color: #7c3aed;
-  text-decoration: none;
-}
-</style>
+<meta charset="UTF-8">
+<title>KickStats</title>
+<link rel="stylesheet" href="style.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>
-<div class="app">
-
-  <!-- HEADER -->
-  <div class="header">
-    <img
-      class="avatar"
-      src="https://kick.com/img/channels/hyghman/profile_image"
-      alt="hyghman avatar"
-    />
-
-    <div class="title">
-      <h1>
-        hyghman
-        <span class="live">LIVE</span>
-      </h1>
-      <div class="sub">Kick channel • auto refresh</div>
+  <header class="header">
+    <div class="user">
+      <img id="avatar" />
+      <div>
+        <h1 id="username">—</h1>
+        <span id="liveBadge" class="badge offline">OFFLINE</span>
+      </div>
     </div>
-  </div>
 
-  <!-- PLAYER -->
-  <div class="player-box">
-    <iframe
-      id="kickPlayer"
-      src="https://player.kick.com/hyghman"
-      allowfullscreen
-      scrolling="no">
-    </iframe>
-  </div>
+    <div class="auth">
+      <button onclick="login()" id="loginBtn">Login with Kick</button>
+      <button onclick="logout()" id="logoutBtn" class="hidden">Logout</button>
+    </div>
+  </header>
 
-  <!-- FOOTER -->
-  <div class="footer">
-    <div id="lastUpdate">Last refresh: —</div>
-    <a href="https://kick.com/hyghman/videos" target="_blank">
-      Vezi VOD-urile pe Kick →
-    </a>
-  </div>
+  <main class="dashboard hidden" id="dashboard">
+    <section class="stats">
+      <div class="card">
+        <h3>Viewers</h3>
+        <p id="viewers">—</p>
+      </div>
+      <div class="card">
+        <h3>Followers</h3>
+        <p id="followers">—</p>
+      </div>
+      <div class="card">
+        <h3>Status</h3>
+        <p id="status">—</p>
+      </div>
+    </section>
 
-</div>
+    <section class="chart">
+      <h2>Live Viewers</h2>
+      <canvas id="viewerChart"></canvas>
+    </section>
+  </main>
 
-<script>
-const player = document.getElementById("kickPlayer");
-const lastUpdate = document.getElementById("lastUpdate");
-
-// 🔁 refresh iframe (Kick oficial)
-function refreshKick() {
-  const src = player.src;
-  player.src = "";
-  setTimeout(() => {
-    player.src = src;
-  }, 200);
-
-  lastUpdate.textContent =
-    "Last refresh: " + new Date().toLocaleTimeString();
-}
-
-// load inițial
-refreshKick();
-
-// ⏱️ AUTO REFRESH (10 sec)
-setInterval(refreshKick, 10000);
-</script>
-
+<script src="script.js"></script>
 </body>
 </html>
