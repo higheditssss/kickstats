@@ -21,12 +21,14 @@ export default async function handler(req, res) {
     cookie.serialize("kick_access", data.access_token, {
       httpOnly: true,
       secure: true,
+      sameSite: "lax",
       path: "/",
       maxAge: data.expires_in
     }),
     cookie.serialize("kick_refresh", data.refresh_token, {
       httpOnly: true,
       secure: true,
+      sameSite: "lax",
       path: "/",
       maxAge: 60 * 60 * 24 * 30
     })
