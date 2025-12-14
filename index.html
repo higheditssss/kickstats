@@ -1,148 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8">
 <title>KickStats</title>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-
-<style>
-* {
-  box-sizing: border-box;
-  font-family: Inter, system-ui, sans-serif;
-}
-
-body {
-  margin: 0;
-  background: radial-gradient(circle at top, #151515, #070707);
-  color: #fff;
-}
-
-/* HEADER */
-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 24px 32px;
-  border-bottom: 1px solid #1f1f1f;
-}
-
-.brand {
-  font-size: 22px;
-  font-weight: 700;
-}
-
-.login-link {
-  background: #7c3aed;
-  color: white;
-  padding: 12px 20px;
-  border-radius: 10px;
-  text-decoration: none;
-  font-weight: 600;
-}
-
-/* MAIN */
-main {
-  padding: 48px 32px;
-  max-width: 1200px;
-  margin: auto;
-}
-
-/* HERO */
-.hero {
-  text-align: center;
-  margin-bottom: 60px;
-}
-
-.hero h1 {
-  font-size: 42px;
-  margin-bottom: 16px;
-}
-
-.hero p {
-  color: #aaa;
-  font-size: 18px;
-}
-
-/* DASHBOARD PLACEHOLDER */
-.dashboard {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
-}
-
-.card {
-  background: linear-gradient(145deg, #121212, #0b0b0b);
-  border-radius: 16px;
-  padding: 24px;
-  box-shadow: 0 0 0 1px #1f1f1f;
-}
-
-.card h3 {
-  margin: 0 0 10px;
-  color: #aaa;
-  font-size: 14px;
-}
-
-.card p {
-  margin: 0;
-  font-size: 28px;
-  font-weight: 700;
-  color: #7c3aed;
-}
-
-/* FOOTER */
-footer {
-  text-align: center;
-  padding: 24px;
-  color: #555;
-  font-size: 14px;
-}
-</style>
+<link rel="stylesheet" href="style.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>
+  <header>
+    <input id="userInput" placeholder="kick username">
+    <button onclick="load()">Search</button>
+  </header>
 
-<header>
-  <div class="brand">KickStats</div>
-
-  <!-- LOGIN DIRECT – GARANTAT -->
-  <a href="/api/auth/login" class="login-link">
-    Login with Kick
-  </a>
-</header>
-
-<main>
-  <section class="hero">
-    <h1>Kick Live Statistics</h1>
-    <p>View real-time viewers, followers and live status using official Kick authentication.</p>
-  </section>
-
-  <!-- UI PLACEHOLDER (după login se va popula cu JS) -->
-  <section class="dashboard">
-    <div class="card">
-      <h3>Viewers</h3>
-      <p>—</p>
+  <main>
+    <div class="profile">
+      <img id="avatar">
+      <h1 id="username"></h1>
+      <span id="status"></span>
     </div>
 
-    <div class="card">
-      <h3>Followers</h3>
-      <p>—</p>
+    <div class="stats">
+      <div>Followers <b id="followers">—</b></div>
+      <div>Viewers <b id="viewers">—</b></div>
     </div>
 
-    <div class="card">
-      <h3>Status</h3>
-      <p>—</p>
-    </div>
-  </section>
-</main>
+    <canvas id="chart"></canvas>
 
-<footer>
-  KickStats • Unofficial fan project
-</footer>
+    <h2>Latest VODs</h2>
+    <div id="vods"></div>
+  </main>
 
+<script src="script.js"></script>
 </body>
 </html>

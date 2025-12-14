@@ -1,31 +1,55 @@
-async function loadStats() {
-  const r = await fetch("/api/kick/stats");
+let chart;
+const ctx = document.getElementById("chart").getContext("2d");
 
-  if (!r.ok) {
-    // NU e logat
-    document.getElementById("loginBtn").classList.remove("hidden");
-    document.getElementById("logoutBtn").classList.add("hidden");
-    document.getElementById("dashboard").classList.add("hidden");
-    document.getElementById("username").textContent = "Not logged in";
-    return;
+chart = new Chart(ctx, {
+  type: "line",
+  data: {
+    labels: [],
+    datasets: [{
+      data: [],
+      borderColor: "#7c3aed",
+      tension: 0.4
+    }]
+  },
+  options: {
+    plugins: { legend: { display: false } },
+    scales: { x: { display: false } }
   }
+});
 
+async function load() {
+  const user = document.getElementById("userInput").value || "hyghman";
+
+  const r = await fetch(`/api/kick?user=${user}`);
   const d = await r.json();
 
-  // ESTE LOGAT
-  document.getElementById("loginBtn").classList.add("hidden");
-  document.getElementById("logoutBtn").classList.remove("hidden");
-  document.getElementById("dashboard").classList.remove("hidden");
-
-  document.getElementById("username").textContent = d.username;
   document.getElementById("avatar").src = d.avatar;
-  document.getElementById("viewers").textContent = d.viewers;
+  document.getElementById("username").textContent = d.username;
   document.getElementById("followers").textContent = d.followers;
+  document.getElementById("viewers").textContent = d.viewers;
+  document.getElementById("status").textContent = d.isLive ? "LIVE" : "OFFLINE";
 
-  const badge = document.getElementById("liveBadge");
-  badge.textContent = d.isLive ? "LIVE" : "OFFLINE";
-  badge.className = "badge " + (d.isLive ? "live" : "offline");
+  const time = new Date().toLocaleTimeString();
+  chart.data.labels.push(time);
+  chart.data.datasets[0].data.push(d.viewers);
+
+  if (chart.data.labels.length > 30) {
+    chart.data.labels.shift();
+    chart.data.datasets[0].data.shift();
+  }
+
+  chart.update();
+
+  const vods = document.getElementById("vods");
+  vods.innerHTML = "";
+  d.vods.forEach(v => {
+    const a = document.createElement("a");
+    a.href = `https://kick.com/${user}?clip=${v.id}`;
+    a.target = "_blank";
+    a.textContent = v.title;
+    vods.appendChild(a);
+  });
 }
 
-loadStats();
-setInterval(loadStats, 10000);
+load();
+setInterval(load, 10000);
